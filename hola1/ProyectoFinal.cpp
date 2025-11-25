@@ -710,7 +710,7 @@ int main() {
                 if (!skip) {
                     glm::mat4 treeModel = glm::translate(glm::mat4(1.0f), glm::vec3(i * treeSpacing, 0.0f, zPos));
                     // Tronco
-                    model = glm::translate(treeModel, glm::vec3(0.0f, 1.0f, 0.0f));
+                    model = glm::translate(treeModel, glm::vec3(0.0f, 0.5f, 0.0f));
                     model = glm::scale(model, glm::vec3(1.0f, 3.0f, 1.0f));
                     glUniform3fv(glGetUniformLocation(modelShader.Program, "material.diffuse"), 1, glm::value_ptr(treeTrunkColor));
                     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -746,7 +746,7 @@ int main() {
                 if (!skip) {
                     glm::mat4 treeModel = glm::translate(glm::mat4(1.0f), glm::vec3(xPos, 0.0f, i * treeSpacing));
                     // Tronco
-                    model = glm::translate(treeModel, glm::vec3(0.0f, 1.0f, 0.0f));
+                    model = glm::translate(treeModel, glm::vec3(0.0f, 0.5f, 0.0f));
                     model = glm::scale(model, glm::vec3(1.0f, 3.0f, 1.0f));
                     glUniform3fv(glGetUniformLocation(modelShader.Program, "material.diffuse"), 1, glm::value_ptr(treeTrunkColor));
                     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -779,7 +779,7 @@ int main() {
         //						CASA DERECHA
         // ===============================================================
         {
-            glm::mat4 houseBaseModel = glm::translate(glm::mat4(1.0f), glm::vec3(20.0f, 0.0f, -10.0f));
+            glm::mat4 houseBaseModel = glm::translate(glm::mat4(1.0f), glm::vec3(20.0f, -0.45f, -10.0f));
             // --- Piso ---
             model = houseBaseModel;
             model = glm::translate(model, glm::vec3(0.0f, -0.5f, 0.0f));
@@ -1308,19 +1308,27 @@ int main() {
             glDrawArrays(GL_TRIANGLES, 0, 36);
             // Fachada y Techo
             model = houseBaseModel;
+            // Pared Frontal (Z-)
             model = glm::translate(model, glm::vec3(0.0f, houseHeight / 2.0f - 0.5f, -10.0f));
-            model = glm::scale(model, glm::vec3(20.0f, houseHeight, 0.1f));
+            // CAMBIO: 0.1f -> 0.4f (Engrosar pared)
+            model = glm::scale(model, glm::vec3(20.0f, houseHeight, 0.4f));
             glUniform3fv(glGetUniformLocation(modelShader.Program, "material.diffuse"), 1, glm::value_ptr(facadeColor));
             glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
             glDrawArrays(GL_TRIANGLES, 0, 36);
+
+            // Pared Izquierda (X-)
             model = houseBaseModel;
             model = glm::translate(model, glm::vec3(-10.0f, houseHeight / 2.0f - 0.5f, 0.0f));
-            model = glm::scale(model, glm::vec3(0.1f, houseHeight, 20.0f));
+            // CAMBIO: 0.1f -> 0.4f (Engrosar pared)
+            model = glm::scale(model, glm::vec3(0.4f, houseHeight, 20.0f));
             glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
             glDrawArrays(GL_TRIANGLES, 0, 36);
+
+            // Pared Derecha (X+)
             model = houseBaseModel;
             model = glm::translate(model, glm::vec3(10.0f, houseHeight / 2.0f - 0.5f, 0.0f));
-            model = glm::scale(model, glm::vec3(0.1f, houseHeight, 20.0f));
+            // CAMBIO: 0.1f -> 0.4f (Engrosar pared)
+            model = glm::scale(model, glm::vec3(0.4f, houseHeight, 20.0f));
             glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
             glDrawArrays(GL_TRIANGLES, 0, 36);
             model = houseBaseModel;
@@ -1407,7 +1415,7 @@ int main() {
         {
             // Este bloque es una copia idéntica del de la Casa Derecha,
             // solo cambia la 'houseBaseModel'
-            glm::mat4 houseBaseModel = glm::translate(glm::mat4(1.0f), glm::vec3(-20.0f, 0.0f, -10.0f));
+            glm::mat4 houseBaseModel = glm::translate(glm::mat4(1.0f), glm::vec3(-20.0f, -0.45f, -10.0f));
             // --- Piso ---
             model = houseBaseModel;
             model = glm::translate(model, glm::vec3(0.0f, -0.5f, 0.0f));
@@ -1917,19 +1925,27 @@ int main() {
             glDrawArrays(GL_TRIANGLES, 0, 36);
             // Fachada y Techo
             model = houseBaseModel;
+            // Pared Frontal (Z-)
             model = glm::translate(model, glm::vec3(0.0f, houseHeight / 2.0f - 0.5f, -10.0f));
-            model = glm::scale(model, glm::vec3(20.0f, houseHeight, 0.1f));
+            // CAMBIO: 0.1f -> 0.4f (Engrosar pared)
+            model = glm::scale(model, glm::vec3(20.0f, houseHeight, 0.4f));
             glUniform3fv(glGetUniformLocation(modelShader.Program, "material.diffuse"), 1, glm::value_ptr(facadeColor));
             glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
             glDrawArrays(GL_TRIANGLES, 0, 36);
+
+            // Pared Izquierda (X-)
             model = houseBaseModel;
             model = glm::translate(model, glm::vec3(-10.0f, houseHeight / 2.0f - 0.5f, 0.0f));
-            model = glm::scale(model, glm::vec3(0.1f, houseHeight, 20.0f));
+            // CAMBIO: 0.1f -> 0.4f (Engrosar pared)
+            model = glm::scale(model, glm::vec3(0.4f, houseHeight, 20.0f));
             glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
             glDrawArrays(GL_TRIANGLES, 0, 36);
+
+            // Pared Derecha (X+)
             model = houseBaseModel;
             model = glm::translate(model, glm::vec3(10.0f, houseHeight / 2.0f - 0.5f, 0.0f));
-            model = glm::scale(model, glm::vec3(0.1f, houseHeight, 20.0f));
+            // CAMBIO: 0.1f -> 0.4f (Engrosar pared)
+            model = glm::scale(model, glm::vec3(0.4f, houseHeight, 20.0f));
             glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
             glDrawArrays(GL_TRIANGLES, 0, 36);
             model = houseBaseModel;
